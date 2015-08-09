@@ -112,6 +112,11 @@ do_show_data_s3() {
          "s3n://datasets.elasticmapreduce/ngrams/books/20090715/${ngram} hdfs:///ngrams/${ngram}"
 }
 do_show_run() {
+    echo "# RUN: (local)"
+    echo rm -rf /tmp/mr-out
+    echo ./j04-entropy.py -o /tmp/mr-out /u/data/star_wars_kid.log
+    echo ""
+    echo "# RUN: (hadoop)"
     echo hdfs dfs -rm -r /user/jjo/ubuconla/mrjob-output
     echo ./j04-entropy.py -r hadoop  hdfs:///user/ubuntu/ubuconla/star_wars_kid.log  -o hdfs:///user/jjo/ubuconla/mrjob-output
     echo hdfs dfs -get hdfs:///user/jjo/ubuconla/mrjob-output/part-00000 /tmp

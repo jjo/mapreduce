@@ -23,8 +23,7 @@ def counter(dict: Seq[String]) : Map[String, Int] = {
 }
 val file = sc.textFile("/u/data/star_wars_kid.mini.log")
 val file = sc.textFile("/u/data/star_wars_kid.log")
-val entroPaths = file.map(r => r.split(" ")).
-    map(x => (x.apply(6), x.apply(0))).
+val entroPaths = file.map(r => {val x=r.split(" ");(x.apply(6), x.apply(0))}).
     reduceByKey(_ + "|" + _).
     map(x => (entropyMap(counter(x._2.split('|'))), x._1)).
     reduceByKey(_ + " " + _).cache()
